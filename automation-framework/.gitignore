@@ -1,5 +1,8 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+
+### Variables de entorno ###
+.env
 !**/src/main/**/target/
 !**/src/test/**/target/
 
