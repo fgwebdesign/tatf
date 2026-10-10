@@ -11,7 +11,8 @@ import com.tatf.adminces.modules.viewusers.task.ViewUsersTask;
 import com.tatf.adminces.support.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 /**
  * Escenario: Eliminar cuenta Tester.
@@ -36,10 +37,12 @@ public class EliminarCuentaTesterTest extends BaseTest {
         viewUsers = new ViewUsersTask(browser);
     }
 
-    @Test
+    @ParameterizedTest(name = "[{index}] perfil {5}")
+    @CsvFileSource(resources = "/datos/eliminar_cuenta_tester.csv", numLinesToSkip = 1)
     @DisplayName("Elimina una cuenta de Tester y deja de estar en Ver usuarios")
-    void eliminarCuentaTester() {
-        String email = TestDataFactory.uniqueEmail("tester.a.eliminar");
+    void eliminarCuentaTester(String prefijoEmail, String nombre, String apellido, String paisNacimiento,
+                              String passwordPorDefecto, TesterProfile profile) {
+        String email = TestDataFactory.uniqueEmail(prefijoEmail);
 
         new SiteGateTask(browser).unlock(baseUrl, sitePassword);
 
@@ -47,10 +50,10 @@ public class EliminarCuentaTesterTest extends BaseTest {
         login.loginAndVerify(adminEmail, adminPassword);
 
         accesos.goToCreateUser();
-        createUser.createTesterAndVerify("Tester", "AEliminar", email, "Uruguay", "Test$1234", TesterProfile.SENIOR);
+        createUser.createTesterAndVerify(nombre, apellido, email, paisNacimiento, passwordPorDefecto, profile);
 
         accesos.goToViewUsers();
-        viewUsers.verifyUserListedWithProfile(email, TesterProfile.SENIOR.displayLabel());
+        viewUsers.verifyUserListedWithProfile(email, profile.displayLabel());
 
         viewUsers.deleteUserAndVerify(email);
         viewUsers.refresh();

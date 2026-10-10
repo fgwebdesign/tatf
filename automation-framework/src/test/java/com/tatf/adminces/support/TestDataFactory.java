@@ -9,6 +9,6 @@ public final class TestDataFactory {
     }
 
     public static String uniqueEmail(String prefix) {
-        return prefix + "." + System.currentTimeMillis() + "@tatf-tests.com";
+        return prefix + "." + System.currentTimeMillis() + "@" + AdminCesConfig.emailDomain();
     }
 }

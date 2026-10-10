@@ -9,7 +9,8 @@ import com.tatf.adminces.modules.sitegate.task.SiteGateTask;
 import com.tatf.adminces.support.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 /**
  * Escenario: Reiniciar contraseña.
@@ -32,17 +33,17 @@ public class ReiniciarContrasenaTest extends BaseTest {
         login = new LoginTask(browser);
     }
 
-    @Test
+    @ParameterizedTest(name = "[{index}] {1} {2}")
+    @CsvFileSource(resources = "/datos/reiniciar_contrasena.csv", numLinesToSkip = 1)
     @DisplayName("Reinicia la contraseña de una cuenta y permite iniciar sesión con la nueva")
-    void reiniciarContrasena() {
-        String email = TestDataFactory.uniqueEmail("reset.password");
-        String passwordOriginal = "Original$1234";
-        String passwordNueva = "Nueva$5678";
+    void reiniciarContrasena(String prefijoEmail, String nombre, String apellido, String paisNacimiento,
+                             String passwordOriginal, String passwordNueva) {
+        String email = TestDataFactory.uniqueEmail(prefijoEmail);
 
         new SiteGateTask(browser).unlock(baseUrl, sitePassword);
 
         home.goToRegister();
-        register.registerAdminAndVerify("Reset", "Password", email, passwordOriginal, "Uruguay");
+        register.registerAdminAndVerify(nombre, apellido, email, passwordOriginal, paisNacimiento);
 
         home.goToForgotPassword();
         forgotPassword.resetPasswordAndVerify(email, passwordNueva);

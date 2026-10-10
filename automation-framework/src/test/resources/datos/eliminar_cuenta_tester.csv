@@ -1,0 +1,3 @@
+prefijoEmail,nombre,apellido,paisNacimiento,passwordPorDefecto,perfil
+tester.a.eliminar,Tester,AEliminar,Uruguay,Test$1234,SENIOR
+tester.a.eliminar.junior,Tester,AEliminarJunior,Uruguay,Test$1234,JUNIOR

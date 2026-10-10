@@ -11,7 +11,8 @@ import com.tatf.adminces.modules.viewusers.task.ViewUsersTask;
 import com.tatf.adminces.support.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 /**
  * Escenario: Crear cuenta Tester.
@@ -33,11 +34,12 @@ public class CrearCuentaTesterTest extends BaseTest {
         viewUsers = new ViewUsersTask(browser);
     }
 
-    @Test
+    @ParameterizedTest(name = "[{index}] perfil {5}")
+    @CsvFileSource(resources = "/datos/crear_cuenta_tester.csv", numLinesToSkip = 1)
     @DisplayName("Crea una cuenta de Tester y queda visible en Ver usuarios con el perfil elegido")
-    void crearCuentaTester() {
-        String email = TestDataFactory.uniqueEmail("nuevo.tester");
-        TesterProfile profile = TesterProfile.JUNIOR;
+    void crearCuentaTester(String prefijoEmail, String nombre, String apellido, String paisNacimiento,
+                           String passwordPorDefecto, TesterProfile profile) {
+        String email = TestDataFactory.uniqueEmail(prefijoEmail);
 
         new SiteGateTask(browser).unlock(baseUrl, sitePassword);
 
@@ -45,7 +47,7 @@ public class CrearCuentaTesterTest extends BaseTest {
         login.loginAndVerify(adminEmail, adminPassword);
 
         accesos.goToCreateUser();
-        createUser.createTesterAndVerify("Nuevo", "Tester", email, "Uruguay", "Test$1234", profile);
+        createUser.createTesterAndVerify(nombre, apellido, email, paisNacimiento, passwordPorDefecto, profile);
 
         accesos.goToViewUsers();
         viewUsers.verifyUserListedWithProfile(email, profile.displayLabel());

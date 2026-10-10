@@ -1,0 +1,3 @@
+prefijoEmail,nombre,apellido,paisNacimiento,passwordOriginal,passwordNueva
+reset.password,Reset,Password,Uruguay,Original$1234,Nueva$5678
+reset.password.dos,Reset,PasswordDos,Uruguay,Original$9999,Nueva$0000

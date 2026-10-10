@@ -6,16 +6,18 @@ import io.github.cdimascio.dotenv.Dotenv;
  * Resuelve la configuración de las pruebas de AdminCES.
  * <p>
  * Orden de resolución para cada clave: propiedad del sistema ({@code -Dclave=valor})
- * → variable de entorno → archivo {@code .env} (no versionado) → valor por defecto.
+ * → variable de entorno → archivo {@code .env} (no versionado) → {@code config.properties}
+ * (valores no secretos versionados). Si no se encuentra, falla indicando la clave.
  */
 public final class AdminCesConfig {
     private static final Dotenv DOTENV = Dotenv.configure().ignoreIfMissing().load();
+    private static final PropertiesFile FILE = new PropertiesFile("config.properties");
 
     private AdminCesConfig() {
     }
 
     public static String baseUrl() {
-        return get("ADMINCES_BASE_URL", "http://cestore.ces.com.uy/adminces");
+        return get("ADMINCES_BASE_URL", "adminces.base_url");
     }
 
     public static String sitePassword() {
@@ -30,7 +32,11 @@ public final class AdminCesConfig {
         return get("ADMINCES_ADMIN_PASSWORD", null);
     }
 
-    private static String get(String key, String defaultValue) {
+    public static String emailDomain() {
+        return get("TESTDATA_EMAIL_DOMAIN", "testdata.email_domain");
+    }
+
+    private static String get(String key, String propertiesKey) {
         String systemProperty = System.getProperty(key);
         if (systemProperty != null && !systemProperty.isBlank()) {
             return systemProperty;
@@ -46,10 +52,12 @@ public final class AdminCesConfig {
             return dotenvValue;
         }
 
-        if (defaultValue == null) {
-            throw new IllegalStateException("Falta configurar la clave " + key
-                    + " (propiedad de sistema, variable de entorno o archivo .env)");
+        String fileValue = propertiesKey == null ? null : FILE.getOrNull(propertiesKey);
+        if (fileValue != null && !fileValue.isBlank()) {
+            return fileValue;
         }
-        return defaultValue;
+
+        throw new IllegalStateException("Falta configurar la clave " + key
+                + " (propiedad de sistema, variable de entorno, archivo .env o config.properties)");
     }
 }
