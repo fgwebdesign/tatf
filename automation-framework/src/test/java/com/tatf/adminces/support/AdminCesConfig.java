@@ -1,17 +1,18 @@
 package com.tatf.adminces.support;
 
+import com.tatf.core.util.ConfigReader;
 import io.github.cdimascio.dotenv.Dotenv;
 
 /**
  * Resuelve la configuración de las pruebas de AdminCES.
  * <p>
  * Orden de resolución para cada clave: propiedad del sistema ({@code -Dclave=valor})
- * → variable de entorno → archivo {@code .env} (no versionado) → {@code config.properties}
+ * → variable de entorno → archivo {@code .env} (no versionado) → {@code adminces.properties}
  * (valores no secretos versionados). Si no se encuentra, falla indicando la clave.
  */
 public final class AdminCesConfig {
     private static final Dotenv DOTENV = Dotenv.configure().ignoreIfMissing().load();
-    private static final PropertiesFile FILE = new PropertiesFile("config.properties");
+    private static final ConfigReader FILE = new ConfigReader("adminces.properties");
 
     private AdminCesConfig() {
     }
@@ -52,12 +53,11 @@ public final class AdminCesConfig {
             return dotenvValue;
         }
 
-        String fileValue = propertiesKey == null ? null : FILE.getOrNull(propertiesKey);
-        if (fileValue != null && !fileValue.isBlank()) {
-            return fileValue;
+        if (propertiesKey != null) {
+            return FILE.asString(propertiesKey);
         }
 
         throw new IllegalStateException("Falta configurar la clave " + key
-                + " (propiedad de sistema, variable de entorno, archivo .env o config.properties)");
+                + " (propiedad de sistema, variable de entorno, archivo .env o adminces.properties)");
     }
 }

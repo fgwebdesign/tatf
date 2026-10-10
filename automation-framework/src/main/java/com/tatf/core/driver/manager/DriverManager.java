@@ -1,5 +1,6 @@
 package com.tatf.core.driver.manager;
 
+import com.tatf.core.util.ConfigReader;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +8,8 @@ import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 
 public class DriverManager {
-    protected static final int IMPLICITLY_WAIT_DEFAULT_SECONDS = 10;
+    protected static final int IMPLICITLY_WAIT_DEFAULT_SECONDS = new ConfigReader("config.properties")
+            .asInt("drivermanager.implicitly_wait_default_seconds");
 
     protected WebDriver driver;
 

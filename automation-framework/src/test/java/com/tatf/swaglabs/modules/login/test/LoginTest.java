@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class IniciarSesionTest extends BaseTest {
+public class LoginTest extends BaseTest {
 
     private LoginTask iniciarSesion;
 

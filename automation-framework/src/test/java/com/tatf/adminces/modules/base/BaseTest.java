@@ -19,7 +19,7 @@ public class BaseTest {
 
     @BeforeAll
     static void configuration() {
-        browser = BrowserFactory.getBrowser(true);
+        browser = BrowserFactory.getBrowser();
         baseUrl = AdminCesConfig.baseUrl();
         sitePassword = AdminCesConfig.sitePassword();
         adminEmail = AdminCesConfig.adminEmail();

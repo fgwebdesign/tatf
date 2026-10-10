@@ -13,7 +13,7 @@ public class BaseTest {
 
     @BeforeAll
     static public void configuration() {
-        browser = BrowserFactory.getBrowser(true);
+        browser = BrowserFactory.getBrowser();
         url = "https://www.saucedemo.com/";
         userNameValue = "standard_user";
         passwordValue = "secret_sauce";
