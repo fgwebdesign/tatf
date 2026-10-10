@@ -11,12 +11,14 @@ import com.tatf.adminces.modules.viewusers.task.ViewUsersTask;
 import com.tatf.adminces.support.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 /**
  * Escenario: Crear cuenta Tester.
  */
+@Tag("tester")
 public class CrearCuentaTesterTest extends BaseTest {
 
     private HomeTask home;
@@ -34,6 +36,8 @@ public class CrearCuentaTesterTest extends BaseTest {
         viewUsers = new ViewUsersTask(browser);
     }
 
+    @Tag("humo")
+    @Tag("regresion")
     @ParameterizedTest(name = "[{index}] perfil {5}")
     @CsvFileSource(resources = "/datos/crear_cuenta_tester.csv", numLinesToSkip = 1)
     @DisplayName("Crea una cuenta de Tester y queda visible en Ver usuarios con el perfil elegido")

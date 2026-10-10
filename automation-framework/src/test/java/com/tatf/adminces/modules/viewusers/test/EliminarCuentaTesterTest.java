@@ -11,6 +11,7 @@ import com.tatf.adminces.modules.viewusers.task.ViewUsersTask;
 import com.tatf.adminces.support.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -20,6 +21,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
  * Para no depender de datos ya cargados, primero da de alta un Tester propio y
  * luego lo elimina.
  */
+@Tag("tester")
 public class EliminarCuentaTesterTest extends BaseTest {
 
     private HomeTask home;
@@ -37,6 +39,7 @@ public class EliminarCuentaTesterTest extends BaseTest {
         viewUsers = new ViewUsersTask(browser);
     }
 
+    @Tag("regresion")
     @ParameterizedTest(name = "[{index}] perfil {5}")
     @CsvFileSource(resources = "/datos/eliminar_cuenta_tester.csv", numLinesToSkip = 1)
     @DisplayName("Elimina una cuenta de Tester y deja de estar en Ver usuarios")

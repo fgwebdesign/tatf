@@ -9,6 +9,7 @@ import com.tatf.adminces.modules.sitegate.task.SiteGateTask;
 import com.tatf.adminces.support.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -18,6 +19,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
  * Para no depender de ni alterar cuentas ya existentes, el escenario primero crea
  * una cuenta de administrador propia y luego le reinicia la contraseña.
  */
+@Tag("administrador")
 public class ReiniciarContrasenaTest extends BaseTest {
 
     private HomeTask home;
@@ -33,6 +35,7 @@ public class ReiniciarContrasenaTest extends BaseTest {
         login = new LoginTask(browser);
     }
 
+    @Tag("regresion")
     @ParameterizedTest(name = "[{index}] {1} {2}")
     @CsvFileSource(resources = "/datos/reiniciar_contrasena.csv", numLinesToSkip = 1)
     @DisplayName("Reinicia la contraseña de una cuenta y permite iniciar sesión con la nueva")

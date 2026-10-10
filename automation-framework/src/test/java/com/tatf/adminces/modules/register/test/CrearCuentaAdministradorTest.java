@@ -11,12 +11,14 @@ import com.tatf.adminces.modules.viewusers.task.ViewUsersTask;
 import com.tatf.adminces.support.TestDataFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 /**
  * Escenario: Crear cuenta Administrador.
  */
+@Tag("administrador")
 public class CrearCuentaAdministradorTest extends BaseTest {
 
     private HomeTask home;
@@ -34,6 +36,8 @@ public class CrearCuentaAdministradorTest extends BaseTest {
         viewUsers = new ViewUsersTask(browser);
     }
 
+    @Tag("humo")
+    @Tag("regresion")
     @ParameterizedTest(name = "[{index}] {1} {2}")
     @CsvFileSource(resources = "/datos/crear_cuenta_administrador.csv", numLinesToSkip = 1)
     @DisplayName("Crea una cuenta de Administrador y queda visible en Ver usuarios")
