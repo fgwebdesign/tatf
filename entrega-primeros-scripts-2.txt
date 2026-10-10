@@ -1,4 +1,4 @@
-Tarea: Aplicando POM - AdminCES
+Tarea: Primeros scripts 2 
 Alumno: Felipe Gutierrez Romero
 
 Link al repositorio:
