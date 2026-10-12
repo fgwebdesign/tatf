@@ -6,7 +6,7 @@ package com.tatf.adminces.modules.createuser.data;
 public enum TesterProfile {
     JUNIOR("testerJunior", "Tester Junior"),
     SENIOR("testerSenior", "Tester Senior"),
-    LIDER("testerLead", "Tester Líder");
+    LIDER("testerLead", "Tester Lider");
 
     private final String radioId;
     private final String displayLabel;

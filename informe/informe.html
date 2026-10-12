@@ -1,0 +1,61 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Informe Final</title>
+<style>
+@page { size: A4; margin: 18mm 16mm }
+body { font-family: Helvetica, Arial, sans-serif; font-size: 11pt; color:#222 }
+h1 { font-size: 26pt; text-align:center; margin: 80px 0 4px } .sub { text-align:center; font-size:15pt }
+.portada { page-break-after: always; text-align:center } h2 { color:#1f3a5f; border-bottom:2px solid #1f3a5f; padding-bottom:3px }
+table { border-collapse: collapse; width:100%; margin:8px 0 14px } td,th { border:1px solid #999; padding:5px 8px; text-align:left; font-size:10pt }
+th { background:#e8edf3 } .ok { color:#14692b; font-weight:bold } .ko { color:#b00020; font-weight:bold }
+.bar { background:#eee; height:18px; border-radius:3px; overflow:hidden; margin:3px 0 10px } .bar div { height:100% }
+.pg { page-break-before: always } li { margin-bottom:4px }
+</style>
+<div class="portada"><h1>INFORME FINAL</h1><div class="sub">Testing Funcional Automatizado</div>
+<div class="sub" style="margin-top:40px"><b>AdminCES</b></div>
+<div class="sub" style="margin-top:80px">Autor<br><b>Felipe Gutierrez Romero</b></div>
+<div class="sub" style="margin-top:30px">Ejecución: 12/10/2026</div></div>
+
+<h2>Introducción</h2>
+<p>Este informe presenta los resultados de la ejecución automatizada de las pruebas funcionales de la aplicación
+AdminCES, agrupadas en suites y ejecutadas en dos navegadores (Chrome y Firefox).</p>
+<ul>
+<li><b>Documento de parametrización:</b> los datos de las pruebas (nombres, países, perfiles, contraseñas) están en archivos
+CSV y los textos esperados y la configuración en archivos <i>properties</i>; las credenciales viven en un archivo <i>.env</i>
+no versionado. Cada fila de un CSV es una ejecución de la prueba.</li>
+<li><b>Verificación/Assert:</b> acción que realiza el script para corroborar si hubo un error funcional (interfaz IVerify).</li>
+<li><b>Framework:</b> automation-framework, con Factory y Singleton para el navegador (interfaz IBrowser) y Page Object Model
+(paquetes <i>pom</i>, <i>task</i> y <i>data</i> por pantalla).</li>
+<li><b>JUnit 5:</b> ejecuta las pruebas y las agrupa en suites mediante etiquetas (<i>@Tag</i>).</li>
+<li><b>Allure:</b> registra los resultados de cada ejecución para generar reportes con métricas.</li>
+<li><b>Selenium:</b> permite manipular el navegador como lo haría un usuario manual.</li>
+<li><b>Drivers (Chrome y Firefox):</b> crean la instancia del navegador usada por Selenium.</li>
+</ul>
+
+<h2>Suites ejecutadas</h2>
+<ul><li>Suite completa (regresión): las 4 suites siguientes</li><li>Crear cuenta Administrador</li><li>Reiniciar contraseña</li>
+<li>Crear cuenta Tester</li><li>Eliminar cuenta Tester</li></ul>
+<p>También existen las suites <i>SuiteHumo</i> (pruebas mínimas, etiqueta <i>humo</i>), <i>SuiteCuentasAdministrador</i> y
+<i>SuiteCuentasTester</i>, que agrupan por etiqueta.</p>
+
+<h2 class="pg">Datos de ambiente</h2>
+<table><tr><th colspan="2">SISTEMA BAJO PRUEBA</th></tr>
+<tr><td>Nombre de ambiente</td><td>AdminCES (pruebas)</td></tr><tr><td>URL</td><td>http://cestore.ces.com.uy/adminces</td></tr>
+<tr><td>Usuario</td><td>Cuenta compartida del grupo (administrador)</td></tr><tr><td>Fecha del sistema</td><td>12/10/2026</td></tr></table>
+<table><tr><th colspan="2">PC EN LA QUE SE EJECUTAN PRUEBAS</th></tr>
+<tr><td>Sistema operativo</td><td>macOS 26.6.2 (Apple Silicon)</td></tr>
+<tr><td>Navegadores web</td><td>Google Chrome 154.0.8037.99 · Mozilla Firefox 157.0.1</td></tr>
+<tr><td>IDE</td><td>Claude Code / terminal con Maven</td></tr>
+<tr><td>Java</td><td>OpenJDK 26.0.2.1</td></tr><tr><td>Versión JUnit</td><td>6.1.3</td></tr>
+<tr><td>Versión Allure</td><td>allure-jupiter 3.0.0</td></tr><tr><td>Versión Selenium</td><td>4.49.0</td></tr>
+<tr><td>Versión driver</td><td>ChromeDriver 154.0.8037.92 · geckodriver gestionado por Selenium Manager</td></tr></table>
+
+<h2 class="pg">Resultados de la ejecución</h2>
+<p><b>Chrome:</b> 9 de 9 pruebas OK</p><div class="bar"><div style="width:100%;background:#14692b"></div></div>
+<p><b>Firefox:</b> 9 de 9 pruebas OK</p><div class="bar"><div style="width:100%;background:#14692b"></div></div>
+<h3>Suite: Crear cuenta Administrador</h3><table><tr><th>ID</th><th>Caso de prueba</th><th>Chrome</th><th>Firefox</th><th>Comentarios</th></tr><tr><td>1</td><td>Administrador (Uruguay)</td><td class="ok">OK (55s)</td><td class="ok">OK (56s)</td><td>-</td></tr><tr><td>2</td><td>Administradora (Argentina)</td><td class="ok">OK (54s)</td><td class="ok">OK (56s)</td><td>-</td></tr></table><h3>Suite: Reiniciar contraseña</h3><table><tr><th>ID</th><th>Caso de prueba</th><th>Chrome</th><th>Firefox</th><th>Comentarios</th></tr><tr><td>3</td><td>Reset Password</td><td class="ok">OK (69s)</td><td class="ok">OK (69s)</td><td>-</td></tr><tr><td>4</td><td>Reset Password Dos</td><td class="ok">OK (67s)</td><td class="ok">OK (69s)</td><td>-</td></tr></table><h3>Suite: Crear cuenta Tester</h3><table><tr><th>ID</th><th>Caso de prueba</th><th>Chrome</th><th>Firefox</th><th>Comentarios</th></tr><tr><td>5</td><td>Perfil Junior</td><td class="ok">OK (54s)</td><td class="ok">OK (56s)</td><td>-</td></tr><tr><td>6</td><td>Perfil Senior</td><td class="ok">OK (54s)</td><td class="ok">OK (56s)</td><td>-</td></tr><tr><td>7</td><td>Perfil Líder</td><td class="ok">OK (54s)</td><td class="ok">OK (56s)</td><td>-</td></tr></table><h3>Suite: Eliminar cuenta Tester</h3><table><tr><th>ID</th><th>Caso de prueba</th><th>Chrome</th><th>Firefox</th><th>Comentarios</th></tr><tr><td>8</td><td>Perfil Senior</td><td class="ok">OK (92s)</td><td class="ok">OK (85s)</td><td>-</td></tr><tr><td>9</td><td>Perfil Junior</td><td class="ok">OK (83s)</td><td class="ok">OK (86s)</td><td>-</td></tr></table>
+<h2>Gráficas</h2>
+<table><tr><th>Navegador</th><th>Total</th><th>OK</th><th>Fallo</th><th>% OK</th></tr>
+<tr><td>Chrome</td><td>9</td><td class="ok">9</td><td class="ko">0</td><td>100%</td></tr>
+<tr><td>Firefox</td><td>9</td><td class="ok">9</td><td class="ko">0</td><td>100%</td></tr></table>
+<p>Observación: durante la preparación se corrigió el dato esperado del perfil "Tester Lider", que la aplicación muestra sin tilde;
+fue un error del dato de prueba y no de la aplicación.</p>
+</html>

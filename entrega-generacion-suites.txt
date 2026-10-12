@@ -1,0 +1,8 @@
+Tarea: Desarrollo y ejecucion de suites - AdminCES
+Alumno: Felipe Gutierrez Romero
+
+Link al repositorio:
+https://github.com/fgwebdesign/tatf/tree/generacion-suites
+
+Informe de Ejecucion de Pruebas:
+informe/Informe_Final_AdminCES.pdf (adjunto tambien en la entrega)
